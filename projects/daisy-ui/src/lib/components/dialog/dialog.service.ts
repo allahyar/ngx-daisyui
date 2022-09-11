@@ -1,7 +1,7 @@
 import {
 	ApplicationRef,
 	ComponentFactoryResolver,
-	EmbeddedViewRef,
+	EmbeddedViewRef, Inject,
 	Injectable,
 	Injector,
 	StaticProvider,
@@ -11,6 +11,7 @@ import {DialogRef} from "./dialog-ref";
 import {delay, filter, of} from "rxjs";
 import {IDialogParams} from "@daisy/core";
 import {NavigationStart, Router} from "@angular/router";
+import {DOCUMENT} from "@angular/common";
 
 @Injectable()
 export class DialogService {
@@ -18,6 +19,7 @@ export class DialogService {
 	private dialogRef!: DialogRef<any, any>
 
 	constructor(private resolver: ComponentFactoryResolver,
+				@Inject(DOCUMENT) private document: Document,
 				private appRef: ApplicationRef,
 				private router: Router,
 				private injector: Injector
@@ -39,7 +41,7 @@ export class DialogService {
 		const componentRef = factory.create(injector);
 
 
-		of(componentRef).pipe(delay(500)).subscribe(_ => {
+		of(componentRef).pipe(delay(200)).subscribe(_ => {
 			componentRef.location.nativeElement.children[0].classList.add('modal-open')
 		})
 
@@ -48,7 +50,7 @@ export class DialogService {
 
 		let domElement = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
 
-		(options.context as any && document.body).appendChild(domElement)
+		((options.context as any) ?? this.document.body).appendChild(domElement);
 
 		this.dialogRef.componentRef = componentRef;
 
