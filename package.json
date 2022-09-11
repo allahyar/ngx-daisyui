@@ -7,6 +7,7 @@
 		"build": "ng build",
 		"build:core": "ng build daisy-core",
 		"build:ui": "ng build daisy-ui",
+		"deploy": "ng deploy --base-href=/ngx-daisyui/",
 		"watch": "ng build --watch --configuration development",
 		"test": "ng test"
 	},
@@ -35,6 +36,7 @@
 		"@angular/cli": "~14.2.1",
 		"@angular/compiler-cli": "^14.0.0",
 		"@types/jasmine": "~4.0.0",
+		"angular-cli-ghpages": "1.0.3",
 		"jasmine-core": "~4.3.0",
 		"karma": "~6.4.0",
 		"karma-chrome-launcher": "~3.1.0",
