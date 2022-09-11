@@ -102,6 +102,71 @@
           }
         }
       }
+    },
+    "daisy-ui": {
+      "projectType": "library",
+      "root": "projects/daisy-ui",
+      "sourceRoot": "projects/daisy-ui/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/daisy-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/daisy-ui/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/daisy-ui/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/daisy-ui/src/test.ts",
+            "tsConfig": "projects/daisy-ui/tsconfig.spec.json",
+            "karmaConfig": "projects/daisy-ui/karma.conf.js"
+          }
+        }
+      }
+    },
+    "daisy-core": {
+      "projectType": "library",
+      "root": "projects/daisy-core",
+      "sourceRoot": "projects/daisy-core/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/daisy-core/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/daisy-core/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/daisy-core/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/daisy-core/src/test.ts",
+            "tsConfig": "projects/daisy-core/tsconfig.spec.json",
+            "karmaConfig": "projects/daisy-core/karma.conf.js"
+          }
+        }
+      }
     }
+  },
+  "cli": {
+    "analytics": "d977620f-0f68-4104-a606-d7336a2f4bd6"
   }
 }
