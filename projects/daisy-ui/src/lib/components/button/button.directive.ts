@@ -1,4 +1,5 @@
-import {Directive, ElementRef, HostBinding, Input} from '@angular/core';
+import {Directive, ElementRef, HostBinding, Inject, Input, OnInit, Renderer2} from '@angular/core';
+import {DOCUMENT} from "@angular/common";
 
 type ButtonType =
 	'info'
@@ -25,7 +26,7 @@ type ButtonSize = 'tiny' | 'small' | 'normal' | 'large'
 @Directive({
 	selector: 'button[du-button]'
 })
-export class ButtonDirective {
+export class ButtonDirective implements OnInit {
 
 	@Input() color: ButtonType = 'default';
 	@Input() size: ButtonSize = 'normal';
@@ -38,14 +39,17 @@ export class ButtonDirective {
 	private _size!: 'lg' | 'sm' | 'xs' | null
 
 
-	constructor(private el: ElementRef) {
-		if (this.icon) {
-			const iconEl = document.createElement("i");
-			iconEl.classList.add(this.icon)
-			this.el.nativeElement.appendChild(iconEl)
-		}
+	constructor(private el: ElementRef,
+				@Inject(DOCUMENT) public document: Document,
+				private renderer: Renderer2) {
 	}
 
+
+	ngOnInit() {
+		if (this.icon) {
+			this.makeIcon()
+		}
+	}
 
 	@HostBinding('class')
 	get classList(): string {
@@ -81,4 +85,20 @@ export class ButtonDirective {
 				this._size = null;
 		}
 	}
+
+	makeIcon() {
+		const icon = this.renderer.createElement("i");
+		icon.className = this.icon;
+
+		if (this.document.documentElement.dir === 'ltr') {
+			const html = this.renderer.createText(this.el.nativeElement.innerHTML);
+			this.el.nativeElement.innerText = ''
+			this.renderer.appendChild(this.el.nativeElement, icon);
+			this.renderer.appendChild(this.el.nativeElement, html);
+		} else {
+			this.renderer.appendChild(this.el.nativeElement, icon);
+		}
+
+	}
+
 }
