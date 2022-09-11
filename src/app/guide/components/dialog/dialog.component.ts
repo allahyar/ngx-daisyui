@@ -4,7 +4,7 @@ import {ConfirmDialogComponent} from "../../../confirm-dialog/confirm-dialog.com
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
-	selector: 'dialog',
+	selector: 'guide-dialog',
 	templateUrl: './dialog.component.html'
 })
 export class DialogComponent implements OnInit {

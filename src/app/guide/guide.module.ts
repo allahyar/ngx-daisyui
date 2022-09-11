@@ -3,7 +3,10 @@ import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
 import {GuideComponent} from './guide.component';
 import {DialogComponent} from './components/dialog/dialog.component';
-import { ButtonComponent } from './components/button/button.component';
+import {ButtonComponent} from './components/button/button.component';
+import {DialogModule} from "@daisy/ui";
+import {ButtonModule} from "@daisy/ui";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 const routes: Routes = [
 	{
@@ -20,10 +23,14 @@ const routes: Routes = [
 	declarations: [
 		GuideComponent,
 		DialogComponent,
-  ButtonComponent
+		ButtonComponent
 	],
 	imports: [
 		CommonModule,
+		DialogModule,
+		ButtonModule,
+		ReactiveFormsModule,
+		FormsModule,
 		RouterModule.forChild(routes)
 	]
 })

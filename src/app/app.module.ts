@@ -4,7 +4,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component';
-import {DialogModule} from "@daisy/ui";
 
 @NgModule({
 	declarations: [
@@ -13,7 +12,6 @@ import {DialogModule} from "@daisy/ui";
 	],
 	imports: [
 		BrowserModule,
-		DialogModule,
 		AppRoutingModule
 	],
 	providers: [],
