@@ -16,6 +16,11 @@ export class DialogComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		this.openDialog()
+	}
+
+
+	openDialog(){
 		this.dialogService.open(ConfirmDialogComponent, {
 			data: 'adad',
 			title: 'Dialog title',
@@ -23,11 +28,6 @@ export class DialogComponent implements OnInit {
 		}).onClose.subscribe(x => {
 			console.log(x)
 		})
-
-		setTimeout(() => {
-			this.router.navigate(['../button'], {relativeTo: this.route})
-		}, 5000)
-
 	}
 
 }
