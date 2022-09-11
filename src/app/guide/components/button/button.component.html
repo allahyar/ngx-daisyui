@@ -1,3 +1,13 @@
 <p>button works!</p>
-<button du-button color="secondary" [isOutline]="true">Button</button>
+<div class="flex space-x-2">
+	<button du-button color="secondary" [isOutline]="true">Button</button>
+	<button du-button color="secondary">Button</button>
+	<button du-button color="primary" [isLoading]="true">Button</button>
+	<button du-button color="error" [isOutline]="true" [isLoading]="true">Button</button>
+	<button du-button color="error" [isOutline]="true" icon="fe fe-heart mr-2">Button</button>
+	<button du-button color="error" [isOutline]="true" shape="square">
+		<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+	</button>
 
+	<button class="btn btn-outline btn-secondary">Button</button>
+</div>
