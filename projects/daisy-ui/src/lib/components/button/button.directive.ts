@@ -5,7 +5,6 @@ type ButtonType =
 	'info'
 	| 'error'
 	| 'warning'
-	| 'default'
 	| 'glass'
 	| 'primary'
 	| 'secondary'
@@ -21,23 +20,25 @@ type ButtonShape =
 	| 'wide'
 	| null;
 
-type ButtonSize = 'tiny' | 'small' | 'normal' | 'large'
+
+type ButtonSize = 'lg' | 'sm' | 'xs' | null
 
 @Directive({
 	selector: 'button[du-button]'
 })
 export class ButtonDirective implements OnInit {
 
-	@Input() color: ButtonType = 'default';
-	@Input() size: ButtonSize = 'normal';
+	@Input() color!: ButtonType;
+	@Input() size!: ButtonSize;
 	@Input() isLoading: boolean = false;
 	@Input() isOutline: boolean = false;
 	@Input() isActive: boolean = false;
 	@Input() icon!: string;
 	@Input() shape!: ButtonShape;
 
-	private _size!: 'lg' | 'sm' | 'xs' | null
-
+	private readonly colors = ['btn-info', 'btn-error', 'btn-warning', 'btn-primary', 'btn-secondary', 'btn-disabled', 'btn-ghost', 'btn-glass', 'btn-link', 'accent']
+	private readonly sizes = ['btn-lg', 'btn-sm', 'btn-xs', 'btn-md']
+	private readonly shapes = ['btn-circle', 'btn-square', 'btn-block', 'btn-wide']
 
 	constructor(private el: ElementRef,
 				@Inject(DOCUMENT) public document: Document,
@@ -53,37 +54,15 @@ export class ButtonDirective implements OnInit {
 
 	@HostBinding('class')
 	get classList(): string {
-
-		this.setSizeButton()
-
 		return [
 			'btn',
-			this._size ? `btn-${this._size}` : ``,
+			this.size ? `btn-${this.size}` : ``,
 			this.color ? `btn-${this.color}` : ``,
 			this.shape ? `btn-${this.shape}` : ``,
 			this.isActive ? `btn-active` : ``,
 			this.isLoading ? `loading` : ``,
 			this.isOutline ? `btn-outline` : ``,
 		].join(' ');
-	}
-
-	setSizeButton() {
-		switch (this.size) {
-			case 'normal':
-				this._size = null;
-				break
-			case 'large':
-				this._size = 'lg';
-				break
-			case 'small':
-				this._size = 'sm';
-				break
-			case 'tiny':
-				this._size = 'xs';
-				break
-			default:
-				this._size = null;
-		}
 	}
 
 	makeIcon() {
