@@ -50,7 +50,7 @@ export class DialogService {
 
 		let domElement = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
 
-		((options.context as any) ?? this.document.body).appendChild(domElement);
+		(<HTMLElement>options.context ?? this.document.body).appendChild(domElement);
 
 		this.dialogRef.componentRef = componentRef;
 
