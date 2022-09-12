@@ -4,8 +4,10 @@ import {RouterModule, Routes} from "@angular/router";
 import {GuideComponent} from './guide.component';
 import {DialogComponent} from './components/dialog/dialog.component';
 import {ButtonComponent} from './components/button/button.component';
+import {DaisyUiModule} from "@daisy/ui";
 import {DialogModule} from "@daisy/ui";
 import {ButtonModule} from "@daisy/ui";
+import {FormControlModule} from "@daisy/ui";
 
 const routes: Routes = [
 	{
@@ -26,8 +28,10 @@ const routes: Routes = [
 	],
 	imports: [
 		CommonModule,
-		DialogModule,
-		ButtonModule,
+		// DialogModule,
+		// ButtonModule,
+		// FormControlModule,
+		DaisyUiModule,
 		RouterModule.forChild(routes)
 	]
 })
