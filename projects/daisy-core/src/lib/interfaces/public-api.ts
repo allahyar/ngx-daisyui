@@ -3,4 +3,5 @@
  */
 
 export * from './dialog-params';
+export * from './form-control';
 
