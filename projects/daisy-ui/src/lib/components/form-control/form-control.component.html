@@ -1,6 +1,6 @@
-<label class="label" *ngIf="labelText">
-	<span class="label-text">{{labelText}}</span>
-	<span class="label-text-alt">{{labelAltText}}</span>
+<label class="label" *ngIf="label">
+	<span class="label-text">{{label}}</span>
+	<span class="label-text-alt" *ngIf="labelAlt">{{labelAlt}}</span>
 </label>
 <ng-content></ng-content>
 <label class="label">

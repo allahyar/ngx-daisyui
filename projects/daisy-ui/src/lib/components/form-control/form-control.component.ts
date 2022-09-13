@@ -1,25 +1,20 @@
-import {Component, HostBinding, Input, OnInit} from '@angular/core';
-import {FormControl} from "@daisy/core";
-
+import {Component, HostBinding, Input} from '@angular/core';
 
 @Component({
 	selector: 'form-control',
 	templateUrl: './form-control.component.html'
 })
-export class FormControlComponent implements FormControl {
+export class FormControlComponent {
 
 
-	@Input() labelText!: string;
-	@Input() labelAltText!: string;
+	@Input() label!: string;
+	@Input() labelAlt!: string;
 
 	@HostBinding('class')
 	get classList(): string {
 		return [
 			'form-control'
 		].join(' ');
-	}
-
-	constructor() {
 	}
 
 }
