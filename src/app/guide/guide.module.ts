@@ -8,6 +8,8 @@ import {DaisyUiModule} from "@daisy/ui";
 import {DialogModule} from "@daisy/ui";
 import {ButtonModule} from "@daisy/ui";
 import {FormControlModule} from "@daisy/ui";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
 
 const routes: Routes = [
 	{
@@ -31,9 +33,18 @@ const routes: Routes = [
 		// DialogModule,
 		// ButtonModule,
 		// FormControlModule,
-		DaisyUiModule,
+		DaisyUiModule.forRoot({
+			validationErrors: {
+				required: 'این فیلد الزامی است',
+				minlength: 'تعداد کاراکترها باید بیشتر باشد'
+			}
+		}),
+		FormsModule,
+		ReactiveFormsModule,
+		HttpClientModule,
 		RouterModule.forChild(routes)
 	]
 })
 export class GuideModule {
+
 }
