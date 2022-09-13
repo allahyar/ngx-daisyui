@@ -1,0 +1,4 @@
+<label class="label" *ngIf="!errorTemplate && !hideError">
+	<span class="label-text-alt">{{ errorText }}</span>
+</label>
+<ng-template *ngTemplateOutlet="errorTemplate; context: errorContext"></ng-template>
