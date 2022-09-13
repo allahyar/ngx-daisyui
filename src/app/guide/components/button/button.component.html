@@ -1,22 +1,24 @@
 <p>button works!</p>
 <div class="flex space-x-2">
-	<button du-button color="secondary" [isOutline]="true">Button</button>
+	<button du-button color="secondary" [outline]="true">Button</button>
 	<button du-button color="secondary">Button</button>
-	<button du-button color="primary" [isLoading]="true">Button</button>
-	<button du-button color="error" [isOutline]="true" [isLoading]="true">Button</button>
-	<button du-button color="error" [isOutline]="true" icon="fe fe-heart mr-2">Button</button>
-	<button du-button color="error" [isOutline]="true" shape="square">
+	<button du-button color="primary" [loading]="true">Button</button>
+	<button du-button color="error" [outline]="true" [loading]="true">Button</button>
+	<button du-button color="error" [outline]="true" icon="fe fe-heart mr-2">Button</button>
+	<button du-button color="error" [outline]="true" shape="square">
 		<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
 	</button>
-
+	<button du-button color="error" [outline]="true" (click)="getUser()" [loader]="userSubscription">Button</button>
 </div>
 
-<form-control class="max-w-xs" labelText="First name :">
-	<input type="text" placeholder="Type here" du-textbox border="bordered" />
+<form-control class="max-w-xs" [formGroup]="form" label="First name :" labelAlt="REQUIRED">
+	<input type="text" placeholder="Type here" formControlName="firstname" du-textbox control-error border="bordered" [errorTemplate]="simpleTemplate"  />
+	<ng-template #simpleTemplate let-error let-text="text" > {{ text }} </ng-template>
 </form-control>
 
-ad
-
+<form-control class="max-w-xs" [formGroup]="form" label="Last name :" labelAlt="REQUIRED">
+	<input type="text" placeholder="Type here" formControlName="lastname" du-textbox control-error border="bordered" />
+</form-control>
 
 
 

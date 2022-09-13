@@ -1,5 +1,6 @@
 import {Directive, ElementRef, HostBinding, Inject, Input, OnInit, Renderer2} from '@angular/core';
 import {DOCUMENT} from "@angular/common";
+import {Subscription} from "rxjs";
 
 type ButtonType =
 	'info'
@@ -30,11 +31,26 @@ export class ButtonDirective implements OnInit {
 
 	@Input() color!: ButtonType;
 	@Input() size!: ButtonSize;
-	@Input() isLoading: boolean = false;
-	@Input() isOutline: boolean = false;
-	@Input() isActive: boolean = false;
+	@Input() loading: boolean = false;
+	@Input() outline: boolean = false;
+	@Input() active: boolean = false;
 	@Input() icon!: string;
 	@Input() shape!: ButtonShape;
+
+	promise: any;
+
+	@Input()
+	set loader(value: any) {
+		const isSubscription: boolean = value instanceof Subscription;
+		if (isSubscription) {
+			this.promise = new Promise((resolve: any) => {
+				(value as Subscription).add(resolve);
+			});
+			this.initLoaderHandler();
+		}
+		this.loading = value;
+	}
+
 
 	private readonly colors = ['btn-info', 'btn-error', 'btn-warning', 'btn-primary', 'btn-secondary', 'btn-disabled', 'btn-ghost', 'btn-glass', 'btn-link', 'accent']
 	private readonly sizes = ['btn-lg', 'btn-sm', 'btn-xs', 'btn-md']
@@ -59,9 +75,9 @@ export class ButtonDirective implements OnInit {
 			this.size ? `btn-${this.size}` : ``,
 			this.color ? `btn-${this.color}` : ``,
 			this.shape ? `btn-${this.shape}` : ``,
-			this.isActive ? `btn-active` : ``,
-			this.isLoading ? `loading` : ``,
-			this.isOutline ? `btn-outline` : ``,
+			this.active ? `btn-active` : ``,
+			this.loading ? `loading` : ``,
+			this.outline ? `btn-outline` : ``,
 		].join(' ');
 	}
 
@@ -79,5 +95,25 @@ export class ButtonDirective implements OnInit {
 		}
 
 	}
+
+	initLoaderHandler() {
+		const promise = this.promise;
+		if (promise) {
+
+			this.loading = true;
+			const resolveLoadingState = () => {
+				this.loading = false;
+			};
+
+			if (promise.finally) {
+				promise.finally(resolveLoadingState);
+			} else {
+				promise
+					.then(resolveLoadingState)
+					.catch(resolveLoadingState);
+			}
+		}
+	}
+
 
 }
