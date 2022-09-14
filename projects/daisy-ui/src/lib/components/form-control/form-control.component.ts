@@ -1,7 +1,7 @@
 import {Component, HostBinding, Input} from '@angular/core';
 
 @Component({
-	selector: 'form-control',
+	selector: 'du-form-control',
 	templateUrl: './form-control.component.html'
 })
 export class FormControlComponent {
