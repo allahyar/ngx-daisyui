@@ -10,7 +10,7 @@ import {
 	ViewContainerRef
 } from '@angular/core';
 import {Observable, Subscription} from "rxjs";
-import {NgControl} from "@angular/forms";
+import {NgControl, ValidationErrors} from "@angular/forms";
 import {DefaultControlErrorComponent} from "./default-control-error/default-control-error.component";
 import {VALIDATION_ERRORS} from "../../injectionTokens";
 import {ErrorComponentTemplate} from "@daisy/core";
@@ -35,41 +35,30 @@ export class ControlErrorDirective implements OnInit, OnDestroy {
 		if (this.control && this.control.statusChanges instanceof Observable) {
 			this.statusChangeSubscription = this.control.statusChanges.subscribe((status) => {
 				if (status == 'INVALID') {
-					console.log('INVALID')
-					this.setError()
-					// this.showError();
+					const errors = <Object>this.control.errors;
+					const key = Object.keys(errors)[Object.keys(errors).length - 1]
+					this.prepareErrors(this.validationErrors[key], errors)
 					this.host.nativeElement.classList.add('input-error')
 				} else {
-					// this.removeError();
-					if (this.ref) {
-						this.ref.instance.text = null
-					}
-					// this.ref.destroy()
-					console.log('VALID')
+					this.prepareErrors(null)
 					this.host.nativeElement.classList.remove('input-error')
 				}
 			})
 		}
 	}
 
-	setError() {
-		if (!this.control.errors) return
-		let errorText;
-		for (const [key, value] of Object.entries(this.control.errors)) {
-			console.log(key)
-			errorText = this.validationErrors[key]
-		}
+	prepareErrors(test: string | null, error?: ValidationErrors) {
 
 		if (!this.ref) {
 			const factory = this.resolver.resolveComponentFactory(DefaultControlErrorComponent)
 			this.ref = this.vcr.createComponent<DefaultControlErrorComponent>(factory)
-
-			if (this.errorTemplate) {
-				this.ref.instance.createTemplate(this.errorTemplate, this.control.errors, errorText)
-			}
 		}
 
-		this.ref.instance.text = errorText
+		if (this.errorTemplate) {
+			this.ref.instance.createTemplate(this.errorTemplate, error || {}, test)
+		} else {
+			this.ref.instance.text = test
+		}
 
 		this.host.nativeElement.after((this.ref.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement)
 	}

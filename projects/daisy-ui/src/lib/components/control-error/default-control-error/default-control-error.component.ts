@@ -16,7 +16,7 @@ export class DefaultControlErrorComponent  {
 
 	constructor(private cdr: ChangeDetectorRef) {}
 
-	createTemplate(tpl: ErrorComponentTemplate, error: ValidationErrors, text: string) {
+	createTemplate(tpl: ErrorComponentTemplate, error: ValidationErrors, text: any) {
 		this.errorTemplate = tpl;
 		this.errorContext = { $implicit: error, text };
 		this.cdr.markForCheck();
