@@ -2,10 +2,10 @@ import {Component, ElementRef, OnInit} from '@angular/core';
 
 
 @Component({
-  selector: 'guide',
-  templateUrl: './guide.component.html'
+  selector: 'docs',
+  templateUrl: './docs.component.html'
 })
-export class GuideComponent implements OnInit {
+export class DocsComponent implements OnInit {
 
   constructor() { }
 
