@@ -12,12 +12,28 @@ import {CustomizeComponent} from './components/customize/customize.component';
 
 const routes: Routes = [
 	{
-		path: 'dialog',
-		component: DialogComponent
-	},
-	{
-		path: 'button',
-		component: ButtonComponent
+		path: '',
+		component: DocsComponent,
+		children:[
+			{
+				path:'',
+				pathMatch:'full',
+				redirectTo:'install'
+			},
+			{
+				path: 'install',
+				component: InstallComponent
+			},
+			{
+				path: 'dialog',
+				component: DialogComponent
+			},
+			{
+				path: 'button',
+				component: ButtonComponent
+			}
+		]
+
 	}
 ]
 
