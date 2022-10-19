@@ -20,9 +20,22 @@
 		<ng-template #simpleTemplate let-error let-text="text"> {{ text }} </ng-template>
 	</du-form-control>
 
-	<du-form-control class="max-w-xs" [formGroup]="form" label="Last name :" labelAlt="REQUIRED">
+	<du-form-control class="max-w-xs" label="Last name :" labelAlt="REQUIRED">
 		<input type="text" placeholder="Type here" formControlName="lastname" du-textbox control-error
 			   border="bordered"/>
+	</du-form-control>
+
+	<du-form-control class="max-w-xs" label="Gender :" labelAlt="REQUIRED">
+		<div class="flex">
+			<label class="label cursor-pointer">
+				<input type="radio" name="gender" [value]="0" class="radio" formControlName="gender" />
+				<span class="label-text mx-2">Male</span>
+			</label>
+			<label class="label cursor-pointer">
+				<input type="radio" name="gender" [value]="1" class="radio" formControlName="gender" />
+				<span class="label-text mx-2">Famle</span>
+			</label>
+		</div>
 	</du-form-control>
 
 </form>

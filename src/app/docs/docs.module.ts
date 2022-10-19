@@ -1,42 +1,56 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
-import {GuideComponent} from './guide.component';
+import {DocsComponent} from './docs.component';
 import {DialogComponent} from './components/dialog/dialog.component';
 import {ButtonComponent} from './components/button/button.component';
 import {DaisyUiModule} from "@daisy/ui";
-import {DialogModule} from "@daisy/ui";
-import {ButtonModule} from "@daisy/ui";
-import {FormControlModule} from "@daisy/ui";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import {InstallComponent} from './components/install/install.component';
+import {CustomizeComponent} from './components/customize/customize.component';
 
 const routes: Routes = [
 	{
-		path: 'dialog',
-		component: DialogComponent
-	},
-	{
-		path: 'button',
-		component: ButtonComponent
+		path: '',
+		component: DocsComponent,
+		children:[
+			{
+				path:'',
+				pathMatch:'full',
+				redirectTo:'install'
+			},
+			{
+				path: 'install',
+				component: InstallComponent
+			},
+			{
+				path: 'dialog',
+				component: DialogComponent
+			},
+			{
+				path: 'button',
+				component: ButtonComponent
+			}
+		]
+
 	}
 ]
 
 @NgModule({
 	declarations: [
-		GuideComponent,
+		InstallComponent,
+		CustomizeComponent,
+		DocsComponent,
 		DialogComponent,
 		ButtonComponent
 	],
 	imports: [
 		CommonModule,
-		// DialogModule,
-		// ButtonModule,
-		// FormControlModule,
 		DaisyUiModule.forRoot({
 			validationErrors: {
-				required: 'این فیلد الزامی است',
-				minlength: 'تعداد کاراکترها باید بیشتر باشد'
+				required: 'This field is required.',
+				minlength: 'The number of characters should be more.'
 			}
 		}),
 		FormsModule,
@@ -45,6 +59,6 @@ const routes: Routes = [
 		RouterModule.forChild(routes)
 	]
 })
-export class GuideModule {
+export class DocsModule {
 
 }

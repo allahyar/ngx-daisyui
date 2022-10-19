@@ -2,3 +2,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+	background: #fafafa;
+}
+
+.drawer-content {
+	width: 300px;
+	background-color: #fff;
+	display: flex;
+	flex-direction: column;
+	flex: none;
+}
+.page-content {
+	max-width: calc(100% - 300px);
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.page-wrapper {
+	height: 100vh;
+	display: flex;
+}

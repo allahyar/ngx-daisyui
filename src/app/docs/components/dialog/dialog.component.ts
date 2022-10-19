@@ -20,7 +20,7 @@ export class DialogComponent implements OnInit {
 	}
 
 
-	openDialog(){
+	openDialog() {
 		this.dialogService.open(ConfirmDialogComponent, {
 			data: 'adad',
 			title: 'Dialog title',

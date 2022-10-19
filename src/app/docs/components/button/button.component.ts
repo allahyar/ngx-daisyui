@@ -17,6 +17,7 @@ export class ButtonComponent implements OnInit, OnDestroy {
 		this.form = fb.group({
 			firstname: [{value: null, disabled: false}, [Validators.required, Validators.minLength(3)]],
 			lastname: [{value: null, disabled: false}, [Validators.required]],
+			gender: [{value: null, disabled: false}, [Validators.required]],
 		})
 	}
 
